@@ -8,7 +8,7 @@ from leituras_duplicadas import limpar_leitura_duplicada
 if __name__ == "__main__":
     
     # realizando a leitura dos data frame
-    moradores = readCSV("moradores.csv")
+    moradores = readCSV("Moradores.csv")
     leit_set = readCSV("leitura_setembro.csv")
     leit_out = readCSV("leitura_outubro.csv")
 
@@ -54,8 +54,8 @@ if __name__ == "__main__":
     dataframe.loc[negativo_set | negativo_out, "status"] = "Leitura inválida"
 
     # Zerar apenas as leituras negativas
-    dataframe.loc[negativo_set, "Leitura_Setembro"] = 0
-    dataframe.loc[negativo_out, "Leitura_Outubro"] = 0
+    # dataframe.loc[negativo_set, "Leitura_Setembro"] = 0
+    # dataframe.loc[negativo_out, "Leitura_Outubro"] = 0
     
     # pega os valores NaN e coloca 0 e classifica como leitura invalida
     elementos_nan = dataframe["Leitura_Outubro"].isna()
@@ -64,6 +64,33 @@ if __name__ == "__main__":
      
     # Ordena pelo lote
     dataframe = dataframe.sort_values(by="Lote")
+
+    #Calcula o consumo bruto
+    dataframe["consumo_bruto"] = dataframe["Leitura_Outubro"] - dataframe["Leitura_Setembro"]
+
+    #Atribue o status Consumo Negativo 
+    dataframe.loc[(dataframe["consumo_bruto"] < 0) & (dataframe["status"].str.strip().str.lower() != "leitura inválida"), "status"] = "Consumo negativo"
     
+    #Atribue o status Consumo Excessivo
+    dataframe.loc[dataframe["consumo_bruto"] > 500, "status"] = "Consumo Excessivo"
+
+    #Atribue o status OK para as linhas que não são anomalias/inválidas
+    dataframe.loc[dataframe["status"].str.strip().str.lower() == "", "status"] = "OK"
+
+    #Atribue 0 aos consumos negativos e leituras inválidas
+    dataframe.loc[dataframe["status"].str.strip().str.lower() == "consumo negativo", "Leitura_Outubro"] = 0
+    dataframe.loc[dataframe["status"].str.strip().str.lower() == "leitura inválida", "Leitura_Outubro"] = 0
+
+    #Ordena em ordem decrescente pelo consumo bruto
+    dataframe = dataframe.sort_values(by="consumo_bruto", ascending=False)
+
+    #Ordena os tops 10 validos e inválidos
+    top10validos = dataframe[dataframe["status"] == "OK"] .sort_values(by="consumo_bruto", ascending=False) .head(10)
+    top10invalidos = dataframe[dataframe["status"] != "OK"] .sort_values(by="consumo_bruto", ascending=False) .head(10)
+
+    #Média de consumo
+    media = dataframe[dataframe["status"] == "OK"] ["consumo_bruto"] .mean()
+
     # Gera um csv do dataframe
-    #dataframe.to_csv("limpo.csv", index=False, encoding="utf-8-sig")
+    # dataframe.to_csv("limpo.csv", index=False, encoding="utf-8-sig")
+   
