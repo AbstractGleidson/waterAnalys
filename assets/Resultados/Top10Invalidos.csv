@@ -1,0 +1,11 @@
+﻿Lote,Nome,Contato,Email,Leitura_Setembro,Leitura_Outubro,consumo_bruto,status
+L01,Rafaela Alves Dutra, (80) 98765-0102,rafaela.dutra@example.com,3990,6500,2510,Consumo Excessivo
+I12,Carolina Mendes Almeida, (60) 99876-5253,carolina.almeida@example.com,4923,6500,1577,Consumo Excessivo
+L04,Amanda Pires Sales, (28) 99876-0405,amanda.sales@example.com,1663,2362,699,Consumo Excessivo
+T07,Fernando Xavier Pires, (52) 98765-6768,fernando.pires@example.com,1894,2498,604,Consumo Excessivo
+H02,Vitória Régia Barros, (95) 99876-2223,vitoria.barros@example.com,3392,0,-42,Consumo negativo
+E15,Ricardo Jorge Martins, (53) 98765-7575,ricardo.martins@example.com,4594,0,-128,Consumo negativo
+F07,Nicolas Oliveira Santos, (90) 98765-8787,nicolas.santos@example.com,3148,0,-140,Consumo negativo
+H03,Benjamin Alves Cunha, (89) 98765-2324,benjamin.cunha@example.com,2492,0,-213,Consumo negativo
+I03,Antônio Carlos Azevedo, (90) 98765-4344,antonio.azevedo@example.com,1048,0,-1048,Leitura inválida
+J05,João Pedro Azevedo, (34) 98765-6566,joao.azevedo@example.com,1163,0,-1163,Leitura inválida
