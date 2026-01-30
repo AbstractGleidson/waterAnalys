@@ -150,9 +150,7 @@ if __name__ == "__main__":
     )
 
     plt.tight_layout()
-    # plt.show()
     plt.savefig("Quantidade.png", dpi=300, bbox_inches="tight")
-
 
     # Gera um csv do dataframe
     # dataframe.to_csv("limpo.csv", index=False, encoding="utf-8-sig")
