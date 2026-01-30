@@ -11,7 +11,7 @@ def readCSV(arq: str):
         _type_: Dataframe do arquivo csv
     """
     
-    path = Path(__file__).parent.parent / "assets" / arq
+    path = Path(__file__).parent.parent / "assets" / "Dados" / arq
     
     return pandas.read_csv(path)
     
